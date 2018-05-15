@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JS DOM paragraph style</title>
+<meta charset="utf-8">
+<script type="text/javascript">
+function js_style() {
+  var x = document.getElementById("text");
+  x.style.color ="blue";
+  x.style.fontSize = "36px";
+}
+function getFormvalue() {
+var f = document.forms["form1"]["fname"].value;
+var l = document.forms["form1"]["lname"].value;
+    if (f == "" || l=="") {
+        alert("FName or LName must be filled out");
+        return false;
+    }else{
+		alert(f);
+		alert(l);
+	}
+}
+function js_bcc() {
+  var x = document.getElementById("bcc");
+  x.style.background ="green";
+}
+function getAttributes() {
+    var x = document.getElementById("somelink").getAttribute("href");
+    document.getElementById("hre").innerHTML = x;
+    var x = document.getElementById("somelink").getAttribute("hreflang");
+    document.getElementById("hrel").innerHTML = x;
+    var x = document.getElementById("somelink").getAttribute("rel");
+    document.getElementById("re").innerHTML = x;
+    var x = document.getElementById("somelink").getAttribute("target");
+    document.getElementById("tar").innerHTML = x;
+}
+function Insert_Row() {
+    var table = document.getElementById("myTable");
+    var row = table.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = "NEW CELL1";
+    cell2.innerHTML = "NEW CELL2";
+}
+function ChangeContent() {
+	for(var i=1;i<=6;i++)
+	{
+		document.getElementById("td"+i).innerHTML = "New Cell"+i;
+	}
+}
+function createTable() {
+	var t=document.getElementById("myTable1");
+	var table= document.createElement('TABLE');
+	table.bolder ='1';
+	var tableB= document.createElement('TBODY');
+	table.appendChild(tableB);
+	for(var i=0;i<3;i++)
+	{
+		var y = document.createElement('TR');
+		tableB.appendChild(y);
+		for(var j=0;j<5;j++)
+		{
+			var z = document.createElement('TD');
+			z.width = '75';
+			z.appendChild(document.createTextNode("Cell" + i + "," +j));
+			y.appendChild(z);
+		}
+	}
+	t.appendChild(table);
+}
+function removecolor() {
+var x = document.getElementById("colorSelect");
+    x.remove(x.selectedIndex);
+}
+var random_images_array = ["http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg", "http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg", "http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg"];
+function getRandomImage(imgAr) {
+    var num = Math.floor( Math.random() * imgAr.length );
+    var img = imgAr[ num ];
+    var imgStr = '<img src="' + img + '" alt = "">';
+    document.write(imgStr); 
+	document.close();
+}
+window.onresize = displayWindowSize;
+window.onload = displayWindowSize;
+
+function displayWindowSize() {
+	myWidth = window.innerWidth;
+	myHeight = window.innerHeight;
+	// your size calculation code here
+	document.getElementById("dimensions").innerHTML = myWidth + "x" + myHeight;
+};
+function createNode(element) {
+      return document.createElement(element);
+  }
+
+  function append(parent, el) {
+    return parent.appendChild(el);
+  }
+function fetch_api() {
+/*clone() - As the method implies this method creates a clone of the response.
+redirect() - This method creates a new response but with a different URL.
+arrayBuffer() - In here we return a promise that resolves with an ArrayBuffer.
+formData() - Also returns a promise but one that resolves with FormData object.
+blob() - This is one resolves with a Blob.
+text() - In this case it resolves with a string.
+json() - Lastly we have the method to that resolves the promise with JSON.*/
+	/*fetch(url)
+	.then((resp) => resp.json()) // Transform the data into json
+  .then(function(data) {
+	// Here you get the data to modify as you please
+	})
+  })
+  .catch(function(error) {
+	// If there is any error you will catch them here
+  });  */
+  const dv = document.getElementById('ajax');
+  const url = 'http://hipsterjesus.com/api/?type=hipster-centric&paras=4';
+  fetch(url,{ mode: 'no-cors'})
+  .then((resp) => resp.text())
+  .then(function(data) {
+  let rs = data.text;
+	alert(rs);
+  })
+  .catch(function(error) {
+    console.log(error);
+  }); 
+  /*const url = 'https://randomuser.me/api/?results=10';
+  fetch(url)
+  .then((resp) => resp.json())
+  .then(function(data) {
+    let authors = data.results;
+    return authors.map(function(author) {
+      let li = createNode('li'),
+          img = createNode('img'),
+          span = createNode('span');
+      img.src = author.picture.medium;
+      span.innerHTML = `${author.name.first} ${author.name.last}`;
+      append(li, img);
+      append(li, span);
+      append(dv, li);
+    })
+  })
+  .catch(function(error) {
+    console.log(error);
+  }); */
+}
+</script>
+</head>
+<body id="bcc">
+<p id='text'>Javascript</p>
+<div>
+<button id="jsstyle" onclick="js_style()" >Style</button>
+</div>
+<form id="form1" onsubmit="getFormvalue()">
+First name: <input type="text" name="fname" value="David"><br>
+Last name: <input type="text" name="lname" value="Beckham"><br>
+<input type="submit" value="Submit">
+</form>
+<div>
+<button onclick="js_bcc()" >Background Color Change</button>
+<p>
+<a id="somelink" type="text/html" hreflang="en-us" rel="nofollow" target="_seft" href="http://www.google.com">Google Website</a>
+</p>
+<button onclick="getAttributes()">Click here to get attributes value</button>
+<p id="hre"></p>
+<p id="hrel"></p>
+<p id="re"></p>
+<p id="tar"></p>
+</div>
+<p>Click the button to add a new row at the first position of the table and then add cells and content.</p>
+
+<table id="myTable" border="1">
+  <tr>
+    <td id="td1">Row1 cell1</td>
+    <td id="td2">Row1 cell2</td>
+  </tr>
+  <tr>
+    <td id="td3">Row2 cell1</td>
+    <td id="td4">Row2 cell2</td>
+  </tr>
+  <tr>
+    <td id="td5">Row3 cell1</td>
+    <td id="td6">Row3 cell2</td>
+  </tr>
+</table>
+<br>
+
+<button onclick="Insert_Row()">Insert Row</button>
+<button onclick="ChangeContent()">Change Content</button>
+<table id="myTable1" border="1">
+</table>
+<button onclick="createTable()">Create the table</button>
+<form>
+<select id="colorSelect">
+<option>Red</option>
+<option>Green</option>
+<option>White</option>
+<option>Black</option>
+</select>
+<input type="button" onclick="removecolor()" value="Select and Remove"><br>
+</form>
+<button onclick="getRandomImage(random_images_array)">Random Image</button>
+<label id="dimensions"></label>
+<div id="ajax">
+</div>
+<input type="button" onclick="fetch_api()" value="fetch API">
+</body>
+</html>

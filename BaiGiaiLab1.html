@@ -97,8 +97,9 @@ function createNode(element) {
     return parent.appendChild(el);
   }
 function fetch_api() {
+//add comment
   const dv = document.getElementById('ajax');
-  const url = 'http://hipsterjesus.com/api/?type=hipster-centric&paras=4';
+  const url = 'http://hipsterjesus.com/api/?type=hipst//er-centric&paras=4';
   fetch(url,{ mode: 'no-cors'})
   .then((resp) => resp.text())
   .then(function(data) {
